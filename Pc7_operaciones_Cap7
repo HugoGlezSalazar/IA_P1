@@ -1,0 +1,13 @@
+print("Hugo Alejandro Gonzalez Salzar 21110306'\n'")
+suma = 20 + 23 + 44
+
+resta = 20 - 23 - 84
+
+multiplicacion = 10 * 87
+
+# El resultado es 10.869565217391305
+division = 5000 / 230 / 2
+
+operacion = 10 / 5 + 15 - 17
+
+print("Resultado:\n", "suma",suma,'\n',"resta",resta, '\n',"multiplicacion",multiplicacion, '\n',"division",round(division,3),'\n',"operacion",operacion) 
