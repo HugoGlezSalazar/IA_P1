@@ -1,0 +1,3 @@
+print("Hugo Alejandro Gonzalez Salazar 2110306")
+colores = ["rojo", "azul", "verde", "amarillo", "marrón", "lila", "negro", "rosa"]
+print(colores[-2],'\n',colores[-3],'\n',colores[-6])
