@@ -1,0 +1,5 @@
+print("Hugo Alejandro Gonzalez Salazar 2110306")
+colores = ["rojo", "azul", "verde", "amarillo", "marrón", "lila", "negro", "rosa"]
+colores.remove('amarillo')
+colores.remove('rojo')
+print(colores)
