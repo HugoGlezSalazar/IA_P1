@@ -1,0 +1,6 @@
+print("Hugo Alejandro Gonzalez Salazar 2110306")
+num1 = 10.45
+num2 = 45.9768
+resultado = num1+num2
+print("Resultado simplificado:",'\n')
+print(round(resultado,2))
