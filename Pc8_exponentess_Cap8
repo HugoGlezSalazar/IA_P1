@@ -1,0 +1,3 @@
+print("Hugo Alejandro Gonzalez Salazar 21110306"'\n')
+mil_veinticuatro = 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2
+print("Resultado:",mil_veinticuatro)
