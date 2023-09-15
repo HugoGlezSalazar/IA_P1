@@ -1,0 +1,6 @@
+print("Hugo Alejandro Gonzalez Salazar 21110306")
+colores = ['rojo', 'azul', 'verde', 'amarillo', 'marrón', 'lila', 'negro', 'rosa', 'blanco', 'naranja']
+almacena_valor = colores.pop(2),colores.pop(3)
+print('El color eliminado y almacenado es:', 
+almacena_valor)
+print('\n',"Lista Actualizada",colores)
