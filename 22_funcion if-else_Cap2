@@ -1,0 +1,7 @@
+print("Hugo Alejandro Gonzalez Salzar 21110306",'\n')
+
+edad = 20
+if edad >= 18:
+	print('Puedes acceder, eres mayor de edad.')
+else:
+	print('No puedes acceder, eres menor de edad.')
