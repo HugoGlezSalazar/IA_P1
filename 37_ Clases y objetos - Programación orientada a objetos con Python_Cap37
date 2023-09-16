@@ -1,0 +1,14 @@
+print("Hugo Alejandro Gonzalez Salzar"'\n')
+class Usuario:
+	nombre = ''
+	apellidos = ''
+
+	def imprime_datos(self):
+		print('Nombre:', self.nombre, '\nApellidos:', self.apellidos)
+
+usuario001 = Usuario()
+
+usuario001.nombre = 'Hugo'
+usuario001.apellidos = 'Gonzalez Salazar'
+
+usuario001.imprime_datos()
