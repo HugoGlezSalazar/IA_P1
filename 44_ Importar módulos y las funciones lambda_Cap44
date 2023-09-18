@@ -1,0 +1,8 @@
+print("Hugo Alejandro Gonzalez Salazar  21110306")
+import math
+
+def area(radio):
+	resultado = math.pi * radio * radio
+	print(resultado)
+
+area(2)
