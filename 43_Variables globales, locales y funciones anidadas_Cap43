@@ -1,0 +1,8 @@
+print("Hugo Alejandro Gonzalez Salazar  21110306")
+def funcion1():
+	global num1
+	num1 = 10
+
+funcion1()
+
+print(num1)
