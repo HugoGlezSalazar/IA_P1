@@ -1,0 +1,81 @@
+import tkinter as tk
+from tkinter import ttk
+import heapq
+
+class Grafo:
+    def __init__(self):
+        self.vertices = set()
+        self.aristas = {}
+
+    def agregar_vertice(self, valor):
+        self.vertices.add(valor)
+        if valor not in self.aristas:
+            self.aristas[valor] = []
+
+    def agregar_arista(self, origen, destino, peso):
+        self.aristas[origen].append((destino, peso))
+        self.aristas[destino].append((origen, peso))
+
+def dijkstra(grafo, inicio):
+    distancias = {vertice: float('inf') for vertice in grafo.vertices}
+    distancias[inicio] = 0
+    cola = [(0, inicio)]
+
+    while cola:
+        distancia_actual, vertice_actual = heapq.heappop(cola)
+        if distancia_actual > distancias[vertice_actual]:
+            continue
+
+        for vecino, peso in grafo.aristas[vertice_actual]:
+            distancia = distancia_actual + peso
+            if distancia < distancias[vecino]:
+                distancias[vecino] = distancia
+                heapq.heappush(cola, (distancia, vecino))
+
+    return distancias
+
+def calcular_dijkstra():
+    inicio = nodo_inicio_var.get()
+    distancias = dijkstra(grafo, inicio)
+    resultado_text.config(state=tk.NORMAL)
+    resultado_text.delete(1.0, tk.END)
+    resultado_text.insert(tk.END, "Vértice\tDistancia desde el inicio\n")
+    for vertice, distancia in distancias.items():
+        resultado_text.insert(tk.END, f"{vertice}\t{distancia}\n")
+    resultado_text.config(state=tk.DISABLED)
+
+# Crear un grafo de ejemplo
+grafo = Grafo()
+grafo.agregar_vertice('A')
+grafo.agregar_vertice('B')
+grafo.agregar_vertice('C')
+grafo.agregar_vertice('D')
+
+grafo.agregar_arista('A', 'B', 1)
+grafo.agregar_arista('A', 'C', 4)
+grafo.agregar_arista('B', 'C', 2)
+grafo.agregar_arista('B', 'D', 5)
+grafo.agregar_arista('C', 'D', 1)
+
+# Crear la interfaz gráfica
+app = tk.Tk()
+app.title("Simulador de Dijkstra")
+
+frame = ttk.Frame(app)
+frame.grid(row=0, column=0, padx=10, pady=10)
+
+nodo_inicio_label = ttk.Label(frame, text="Nodo de inicio:")
+nodo_inicio_label.grid(row=0, column=0)
+
+nodo_inicio_var = tk.StringVar()
+nodo_inicio_combobox = ttk.Combobox(frame, textvariable=nodo_inicio_var, values=list(grafo.vertices))
+nodo_inicio_combobox.grid(row=0, column=1)
+nodo_inicio_combobox.set(list(grafo.vertices)[0])
+
+calcular_button = ttk.Button(frame, text="Calcular Dijkstra", command=calcular_dijkstra)
+calcular_button.grid(row=0, column=2)
+
+resultado_text = tk.Text(frame, state=tk.DISABLED, width=30, height=10)
+resultado_text.grid(row=1, columnspan=3)
+
+app.mainloop()
