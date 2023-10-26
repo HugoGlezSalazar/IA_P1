@@ -1,0 +1,30 @@
+def radix_sort(arr):
+    # Encuentra el número máximo para determinar el número de dígitos
+    max_num = max(arr)
+    # Calcula el número de dígitos en el número máximo
+    num_digits = len(str(max_num))
+    
+    # Inicializa un cubo de almacenamiento de dígitos
+    buckets = [[] for _ in range(10)]
+    
+    # Realiza un ciclo a través de cada dígito, desde el dígito menos significativo al más significativo
+    for digit in range(num_digits):
+        # Distribuye los números en los cubos según el dígito actual
+        for num in arr:
+            # Obtiene el dígito correspondiente al ciclo actual
+            current_digit = (num // 10**digit) % 10
+            # Coloca el número en el cubo correspondiente al dígito
+            buckets[current_digit].append(num)
+        
+        # Reorganiza los números en el arreglo original
+        arr = [num for bucket in buckets for num in bucket]
+        # Limpia los cubos
+        buckets = [[] for _ in range(10)]
+
+    return arr
+
+# Ejemplo de uso
+arr = [170, 45, 75, 90, 802, 24, 2, 66]
+sorted_arr = radix_sort(arr)
+print("Arreglo ordenado:")
+print(sorted_arr)
