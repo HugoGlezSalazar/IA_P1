@@ -1,0 +1,56 @@
+import heapq
+
+def distribution_of_initial_runs(data, memory_size):
+    runs = []  # Lista para almacenar las ejecuciones iniciales
+    run = []   # Lista temporal para una ejecución
+
+    for item in data:
+        run.append(item)
+
+        # Cuando la lista temporal alcanza el tamaño de la memoria principal, ordénala y guárdala como una ejecución inicial
+        if len(run) == memory_size:
+            run.sort()
+            runs.append(run)
+            run = []
+
+    # Si hay elementos en la lista temporal, ordénala y guárdala como la última ejecución inicial
+    if run:
+        run.sort()
+        runs.append(run)
+
+    # Fusiona las ejecuciones iniciales en una ejecución ordenada
+    sorted_data = merge_runs(runs)
+
+    return sorted_data
+
+def merge_runs(runs):
+    if not runs:
+        return []
+
+    while len(runs) > 1:
+        merged = []
+        run1 = runs.pop(0)
+        run2 = runs.pop(0)
+
+        i = j = 0
+        while i < len(run1) and j < len(run2):
+            if run1[i] < run2[j]:
+                merged.append(run1[i])
+                i += 1
+            else:
+                merged.append(run2[j])
+                j += 1
+
+        merged.extend(run1[i:])
+        merged.extend(run2[j:])
+        runs.append(merged)
+
+    return runs[0]
+
+# Ejemplo de uso
+data = [64, 25, 12, 22, 11, 50, 45, 29, 42]
+memory_size = 3
+
+sorted_data = distribution_of_initial_runs(data, memory_size)
+print("Conjunto de datos ordenado:")
+print(sorted_data)
