@@ -1,0 +1,25 @@
+def bubble_sort(arr):
+    n = len(arr)  # Obtén la longitud del arreglo
+
+    # Itera a través de todos los elementos del arreglo
+    for i in range(n):
+        # Bandera para indicar si se realizó algún intercambio en esta pasada
+        swapped = False
+
+        # Los últimos 'i' elementos ya están en su posición ordenada, así que no es necesario revisarlos
+        for j in range(0, n - i - 1):
+            # Compara el elemento actual con el siguiente elemento
+            if arr[j] > arr[j + 1]:
+                # Realiza el intercambio
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+                swapped = True  # Indica que se realizó un intercambio
+
+        # Si no se realizó ningún intercambio en esta pasada, significa que el arreglo está ordenado
+        if not swapped:
+            break
+
+# Ejemplo de uso
+arr = [64, 25, 12, 22, 11]
+bubble_sort(arr)
+print("Arreglo ordenado:")
+print(arr)
