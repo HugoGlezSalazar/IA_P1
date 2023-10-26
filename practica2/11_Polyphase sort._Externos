@@ -1,0 +1,50 @@
+import heapq
+
+def polyphase_sort(c1, c2, c3):
+    # Llenar las primeras cintas con registros iniciales ordenados
+    fill_c1(c1)
+    fill_c2(c2)
+    
+    # Iterar hasta que todas las cintas estén ordenadas
+    while not is_sorted(c1) or not is_sorted(c2):
+        merge(c1, c2, c3)
+        merge(c2, c3, c1)
+        merge(c3, c1, c2)
+
+def fill_c1(c1):
+    # Supongamos que c1 se llena con registros ordenados
+    c1.extend([1, 3, 5, 7, 9])
+
+def fill_c2(c2):
+    # Supongamos que c2 se llena con registros ordenados
+    c2.extend([2, 4, 6, 8, 10])
+
+def is_sorted(c):
+    # Comprueba si una cinta está ordenada
+    return all(c[i] <= c[i+1] for i in range(len(c) - 1))
+
+def merge(src1, src2, dest):
+    # Fusiona dos cintas ordenadas en una tercera cinta
+    merged = []
+    while src1 and src2:
+        if src1[0] <= src2[0]:
+            merged.append(src1.pop(0))
+        else:
+            merged.append(src2.pop(0))
+    merged.extend(src1)
+    merged.extend(src2)
+    
+    # Copia los registros fusionados en la cinta de destino
+    dest.clear()
+    dest.extend(merged)
+
+# Ejemplo de uso
+c1 = []
+c2 = []
+c3 = []
+
+polyphase_sort(c1, c2, c3)
+
+print("Cinta 1 ordenada:", c1)
+print("Cinta 2 ordenada:", c2)
+print("Cinta 3 ordenada:", c3)
