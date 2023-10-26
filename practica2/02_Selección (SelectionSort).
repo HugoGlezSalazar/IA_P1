@@ -1,0 +1,17 @@
+def selection_sort(arr):
+    # Iteramos a través de todos los elementos de la lista
+    for i in range(len(arr)):
+        # Encontramos el índice del elemento mínimo en la porción no ordenada de la lista
+        min_index = i
+        for j in range(i + 1, len(arr)):
+            if arr[j] < arr[min_index]:
+                min_index = j
+        
+        # Intercambiamos el elemento mínimo encontrado con el elemento en la posición actual (i)
+        arr[i], arr[min_index] = arr[min_index], arr[i]
+
+# Ejemplo de uso
+arr = [64, 25, 12, 22, 11]
+selection_sort(arr)
+print("Arreglo ordenado:")
+print(arr)
