@@ -1,0 +1,60 @@
+import networkx as nx
+import matplotlib.pyplot as plt
+
+def prim(graph):
+    # Crear un grafo vacío para el MST
+    mst = nx.Graph()
+
+    # Elegir un nodo inicial arbitrario
+    start_node = list(graph.nodes())[0]
+
+    # Lista para llevar un registro de los nodos incluidos en el MST
+    included_nodes = set([start_node])
+
+    # Repetir hasta que se incluyan todos los nodos en el MST
+    while len(included_nodes) < len(graph.nodes()):
+        min_edge = None
+
+        for node in included_nodes:
+            # Buscar la arista más corta desde los nodos incluidos al resto del grafo
+            edge = min(graph.edges(node, data=True), key=lambda x: x[2]['weight'])
+            
+            if min_edge is None or edge[2]['weight'] < min_edge[2]['weight']:
+                min_edge = edge
+
+        # Agregar la arista más corta al MST
+        mst.add_edge(min_edge[0], min_edge[1], weight=min_edge[2]['weight'])
+        included_nodes.add(min_edge[1])
+
+    return mst
+
+# Crear un grafo de ejemplo
+G = nx.Graph()
+G.add_edge('A', 'B', weight=2)
+G.add_edge('A', 'C', weight=3)
+G.add_edge('B', 'C', weight=1)
+G.add_edge('B', 'D', weight=1)
+G.add_edge('C', 'D', weight=4)
+
+# Calcular el MST de Prim
+mst = prim(G)
+
+# Dibuja el grafo original y el MST
+plt.figure(figsize=(8, 4))
+
+plt.subplot(121)
+pos = nx.spring_layout(G)
+nx.draw(G, pos, with_labels=True, node_size=300, node_color="lightblue")
+labels = nx.get_edge_attributes(G, 'weight')
+nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)
+plt.title("Grafo Original")
+
+plt.subplot(122)
+pos = nx.spring_layout(mst)
+nx.draw(mst, pos, with_labels=True, node_size=300, node_color="lightblue")
+labels = nx.get_edge_attributes(mst, 'weight')
+nx.draw_networkx_edge_labels(mst, pos, edge_labels=labels)
+plt.title("Árbol de Expansión Mínima (MST) de Prim")
+
+plt.tight_layout()
+plt.show()
