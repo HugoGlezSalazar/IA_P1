@@ -1,0 +1,36 @@
+class TreeNode:
+    def __init__(self, key):
+        self.left = None
+        self.right = None
+        self.value = key
+
+def insert(root, key):
+    if root is None:
+        return TreeNode(key)
+    else:
+        if root.value < key:
+            root.right = insert(root.right, key)
+        else:
+            root.left = insert(root.left, key)
+    return root
+
+def inorder_traversal(root, result):
+    if root:
+        inorder_traversal(root.left, result)
+        result.append(root.value)
+        inorder_traversal(root.right, result)
+
+def tree_sort(arr):
+    root = None
+    for item in arr:
+        root = insert(root, item)
+
+    result = []
+    inorder_traversal(root, result)
+    return result
+
+# Ejemplo de uso
+arr = [64, 25, 12, 22, 11]
+sorted_arr = tree_sort(arr)
+print("Arreglo ordenado:")
+print(sorted_arr)
