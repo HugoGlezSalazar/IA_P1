@@ -1,0 +1,35 @@
+def quick_sort(arr):
+    # Comprobación de la lista vacía o con un solo elemento
+    if len(arr) <= 1:
+        return arr
+
+    # Elegir un elemento como pivote (generalmente el último elemento)
+    pivot = arr[-1]
+    # Elementos menores que el pivote
+    lesser = []
+    # Elementos mayores que el pivote
+    greater = []
+    # Elementos iguales al pivote
+    equal = []
+
+    # Particionar la lista en tres grupos: menores, iguales y mayores que el pivote
+    for item in arr:
+        if item < pivot:
+            lesser.append(item)
+        elif item == pivot:
+            equal.append(item)
+        else:
+            greater.append(item)
+
+    # Recursivamente ordenar los subgrupos menores y mayores
+    sorted_lesser = quick_sort(lesser)
+    sorted_greater = quick_sort(greater)
+
+    # Combinar los subgrupos ordenados y el grupo igual para obtener el arreglo ordenado
+    return sorted_lesser + equal + sorted_greater
+
+# Ejemplo de uso
+arr = [64, 25, 12, 22, 11]
+sorted_arr = quick_sort(arr)
+print("Arreglo ordenado:")
+print(sorted_arr)
