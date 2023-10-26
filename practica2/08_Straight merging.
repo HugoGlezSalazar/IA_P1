@@ -1,0 +1,46 @@
+def straight_merging_sort(arr):
+    if len(arr) <= 1:
+        return arr
+
+    # Dividir la lista en sublistas de tamaño 1
+    sublists = [[x] for x in arr]
+
+    while len(sublists) > 1:
+        new_sublists = []
+        i = 0
+
+        while i < len(sublists) - 1:
+            # Fusionar dos sublistas adyacentes y agregar la fusión a la nueva lista
+            merged = merge(sublists[i], sublists[i + 1])
+            new_sublists.append(merged)
+            i += 2
+
+        # Si hay una sublista impar al final, agregarla a la nueva lista sin fusionar
+        if i == len(sublists) - 1:
+            new_sublists.append(sublists[i])
+
+        sublists = new_sublists
+
+    return sublists[0]
+
+def merge(list1, list2):
+    merged = []
+    i = j = 0
+
+    while i < len(list1) and j < len(list2):
+        if list1[i] < list2[j]:
+            merged.append(list1[i])
+            i += 1
+        else:
+            merged.append(list2[j])
+            j += 1
+
+    merged.extend(list1[i:])
+    merged.extend(list2[j:])
+    return merged
+
+# Ejemplo de uso
+arr = [64, 25, 12, 22, 11]
+sorted_arr = straight_merging_sort(arr)
+print("Arreglo ordenado:")
+print(sorted_arr)
