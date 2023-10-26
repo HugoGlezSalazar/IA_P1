@@ -1,0 +1,40 @@
+def merge_sort(arr):
+    if len(arr) > 1:
+        # Paso 1: Dividir la lista en dos mitades
+        mid = len(arr) // 2
+        left_half = arr[:mid]
+        right_half = arr[mid:]
+
+        # Llamadas recursivas a MergeSort en ambas mitades
+        merge_sort(left_half)
+        merge_sort(right_half)
+
+        # Índices para recorrer ambas mitades
+        i = j = k = 0
+
+        # Paso 2: Fusionar las dos mitades en la lista original
+        while i < len(left_half) and j < len(right_half):
+            if left_half[i] < right_half[j]:
+                arr[k] = left_half[i]
+                i += 1
+            else:
+                arr[k] = right_half[j]
+                j += 1
+            k += 1
+
+        # Copiar los elementos restantes de las dos mitades (si los hay)
+        while i < len(left_half):
+            arr[k] = left_half[i]
+            i += 1
+            k += 1
+
+        while j < len(right_half):
+            arr[k] = right_half[j]
+            j += 1
+            k += 1
+
+# Ejemplo de uso
+arr = [64, 25, 12, 22, 11]
+merge_sort(arr)
+print("Arreglo ordenado:")
+print(arr)
