@@ -1,0 +1,43 @@
+import heapq
+
+def balanced_multiway_merging(lists):
+    # Crea una lista de iteradores para cada lista ordenada
+    iterators = [iter(lst) for lst in lists]
+
+    # Inicializa una cola de prioridad (heap) para mantener el próximo elemento de cada lista
+    heap = []
+    for i, it in enumerate(iterators):
+        try:
+            first_element = next(it)
+            heap.append((first_element, i))
+        except StopIteration:
+            pass
+
+    # Inicializa la lista ordenada
+    merged_list = []
+
+    # Hasta que no queden elementos en el heap
+    while heap:
+        # Obtiene el elemento mínimo y su índice en la lista original
+        val, i = heapq.heappop(heap)
+        # Agrega el elemento mínimo a la lista ordenada
+        merged_list.append(val)
+
+        try:
+            # Intenta obtener el siguiente elemento de la lista original a la que pertenece el elemento mínimo
+            next_element = next(iterators[i])
+            # Agrega el siguiente elemento al heap
+            heapq.heappush(heap, (next_element, i))
+        except StopIteration:
+            pass
+
+    return merged_list
+
+# Ejemplo de uso
+list1 = [1, 5, 9, 13, 17]
+list2 = [2, 6, 10, 14, 18]
+list3 = [3, 7, 11, 15, 19]
+
+merged_list = balanced_multiway_merging([list1, list2, list3])
+print("Lista ordenada combinando múltiples listas:")
+print(merged_list)
